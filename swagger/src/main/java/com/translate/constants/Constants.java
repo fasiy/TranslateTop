@@ -1,7 +1,7 @@
-package com.zjx.constants;
+package com.translate.constants;
 
 /**
- * Created by zjx on 2017/6/29.
+ * Created by translate on 2017/6/29.
  *
  * @author zhaojiaxing
  * @version V2.0

@@ -1,4 +1,4 @@
-package com.zjx.constants;
+package com.translate.constants;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import io.swagger.annotations.ApiModel;
@@ -7,7 +7,7 @@ import io.swagger.annotations.ApiModelProperty;
 import java.io.Serializable;
 
 /**
- * Created by zjx on 2017/6/29.
+ * Created by translate on 2017/6/29.
  *
  * @author zhaojiaxing
  * @version V2.0

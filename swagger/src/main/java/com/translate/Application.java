@@ -1,4 +1,4 @@
-package com.zjx;
+package com.translate;
 
 import javax.sql.DataSource;
 
@@ -19,7 +19,7 @@ import org.springframework.transaction.PlatformTransactionManager;
 @EnableAutoConfiguration
 @SpringBootApplication
 @ComponentScan
-@MapperScan("com.zjx.mapper")
+@MapperScan("com.translate.mapper")
 public class Application {
     private static Logger logger = Logger.getLogger(Application.class);
 

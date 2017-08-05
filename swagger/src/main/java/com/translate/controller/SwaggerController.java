@@ -1,9 +1,9 @@
-package com.zjx.controller;
+package com.translate.controller;
 
 
-import com.zjx.constants.Constants;
-import com.zjx.constants.Result;
-import com.zjx.vo.UserVo;
+import com.translate.constants.Constants;
+import com.translate.constants.Result;
+import com.translate.vo.UserVo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
