@@ -1,4 +1,4 @@
-package com.zjx.controller;
+package com.translate.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

@@ -1,7 +1,7 @@
-package com.zjx.mapper;
+package com.translate.mapper;
 
 
-import com.zjx.vo.UserVo;
+import com.translate.vo.UserVo;
 
 /**
  * Created by zl on 2015/8/27.

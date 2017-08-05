@@ -5,6 +5,6 @@
         http://www.springframework.org/schema/beans/spring-beans.xsd"
        default-lazy-init="false">
 
-    <bean class="com.zjx.config.SwaggerConfig"/>
+    <bean class="com.translate.config.SwaggerConfig"/>
 
 </beans>

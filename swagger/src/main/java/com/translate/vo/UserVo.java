@@ -1,10 +1,10 @@
-package com.zjx.vo;
+package com.translate.vo;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
 /**
- * Created by zjx on 2017/6/29.
+ * Created by translate on 2017/6/29.
  *
  * @author zhaojiaxing
  * @version V2.0

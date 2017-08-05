@@ -1,4 +1,4 @@
-package com.zjx.config;
+package com.translate.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -19,7 +19,7 @@ public class SwaggerConfig {
         return new Docket(DocumentationType.SWAGGER_2)
                 .groupName("用户")
                 .select()  // 选择那些路径和api会生成document
-                .apis(RequestHandlerSelectors.basePackage("com.zjx.controller"))
+                .apis(RequestHandlerSelectors.basePackage("com.translate.controller"))
                 .paths(PathSelectors.any()) // 对所有路径进行监控
                 .build()
                 .apiInfo(userInfo());
@@ -32,7 +32,7 @@ public class SwaggerConfig {
                 "用户有关的接口，包括增加删除用户",//小标题
                 "0.1",//版本
                 "成都",
-                new Contact("zjx", "", ""),// 作者
+                new Contact("translate", "", ""),// 作者
                 "swagger url",//链接显示文字
                 ""//网站链接
         );
