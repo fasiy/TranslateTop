@@ -17,6 +17,12 @@ public class UserVo {
     @ApiModelProperty(value = "昵称", required = true)
     private String userName;
 
+    @ApiModelProperty(value = "年龄", required = true)
+    private Integer userAge;
+
+    @ApiModelProperty(value = "用户密码", required = true)
+    private String userPassword;
+
     public long getUserId() {
         return userId;
     }
@@ -31,5 +37,21 @@ public class UserVo {
 
     public void setUserName(String userName) {
         this.userName = userName;
+    }
+
+    public Integer getUserAge() {
+        return userAge;
+    }
+
+    public void setUserAge(Integer userAge) {
+        this.userAge = userAge;
+    }
+
+    public String getUserPassword() {
+        return userPassword;
+    }
+
+    public void setUserPassword(String userPassword) {
+        this.userPassword = userPassword;
     }
 }
