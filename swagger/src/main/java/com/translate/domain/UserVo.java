@@ -1,4 +1,4 @@
-package com.translate.vo;
+package com.translate.domain;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;

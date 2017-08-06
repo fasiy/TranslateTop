@@ -1,7 +1,7 @@
 package com.translate.service;
 
 import com.translate.mapper.UserMapper;
-import com.translate.vo.UserVo;
+import com.translate.domain.UserVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
