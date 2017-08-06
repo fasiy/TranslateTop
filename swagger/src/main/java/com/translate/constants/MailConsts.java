@@ -9,8 +9,6 @@ public interface MailConsts
 
     String SENDER = "aohuanhuanhw@163.com";
 
-    String RECEIVER = "aohuanhuanhw@163.com";
-
     String USERNAME = "aohuanhuanhw@163.com";
 
     String PASSWORD = "root123456";

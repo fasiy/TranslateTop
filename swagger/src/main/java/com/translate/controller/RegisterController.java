@@ -25,7 +25,8 @@ public class RegisterController
 
     @RequestMapping(value = "/sendMail", method = RequestMethod.POST)
     @ApiOperation(value = "发送邮件", notes = "发送邮件")
-    public boolean sendMail(@ApiParam(name = "subject", value = "邮件主题", required = true) @RequestParam(name = "subject", required = true) String subject,
+    public boolean sendMail(@ApiParam(name = "receiver", value = "接收者", required = true) @RequestParam(name = "receiver", required = true) String receiver,
+                            @ApiParam(name = "subject", value = "邮件主题", required = true) @RequestParam(name = "subject", required = true) String subject,
                             @ApiParam(name = "message", value = "邮件内容", required = true) @RequestParam(name = "message", required = true) String message)
     {
         Mail mail = new Mail();
@@ -34,7 +35,7 @@ public class RegisterController
         mail.setUsername(MailConsts.USERNAME);
         mail.setPassword(MailConsts.PASSWORD);
         mail.setSender(MailConsts.SENDER);
-        mail.setReceiver(MailConsts.RECEIVER);
+        mail.setReceiver(receiver);
         mail.setSubject(subject);
         mail.setMessage(message);
 
