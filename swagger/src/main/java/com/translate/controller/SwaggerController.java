@@ -3,11 +3,10 @@ package com.translate.controller;
 
 import com.translate.constants.Constants;
 import com.translate.constants.Result;
-import com.translate.vo.UserVo;
+import com.translate.domain.UserVo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 /**
