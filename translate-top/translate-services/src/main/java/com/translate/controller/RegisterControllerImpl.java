@@ -1,12 +1,12 @@
 package com.translate.controller;
 
 import com.translate.constants.MailConsts;
-import com.translate.domain.Mail;
-import com.translate.service.MailService;
+import com.translate.service.RegisterService;
+import com.translate.support.MailQueue;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.SimpleMailMessage;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -18,9 +18,31 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/register")
 @Api(description = "用户注册接口文档")
-public class RegisterControllerImpl implements RegisterController
-{
-    @Autowired
+public class RegisterControllerImpl implements RegisterService {
+
+  @Override
+  @RequestMapping(value = "/sendMail", method = RequestMethod.POST)
+  @ApiOperation(value = "发送邮件", notes = "发送邮件")
+  public boolean sendMail(
+      @ApiParam(name = "receiver", value = "接收者", required = true) @RequestParam(name = "receiver", required = true) String receiver,
+      @ApiParam(name = "subject", value = "邮件主题", required = true) @RequestParam(name = "subject", required = true) String subject,
+      @ApiParam(name = "message", value = "邮件内容", required = true) @RequestParam(name = "message", required = true) String message) {
+
+    SimpleMailMessage mail = new SimpleMailMessage();
+    mail.setFrom(MailConsts.SENDER);
+    mail.setTo(receiver);
+    mail.setSubject(subject);
+    mail.setText(message);
+
+    try {
+      MailQueue.getMailQueueInstance().produce(mail);
+      return true;
+    } catch (InterruptedException e) {
+      e.printStackTrace();
+    }
+    return false;
+  }
+    /*@Autowired
     private MailService mailService;
 
     @RequestMapping(value = "/sendMail", method = RequestMethod.POST)
@@ -40,5 +62,7 @@ public class RegisterControllerImpl implements RegisterController
         mail.setMessage(message);
 
         return mailService.sendEmail(mail);
-    }
+    }*/
+
+
 }
