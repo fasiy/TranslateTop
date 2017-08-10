@@ -21,39 +21,40 @@ import org.springframework.transaction.PlatformTransactionManager;
 @ComponentScan
 @MapperScan("com.translate.mapper")
 public class Application {
-    private static Logger logger = Logger.getLogger(Application.class);
 
-    @Bean
-    @ConfigurationProperties(prefix="spring.datasource")
-    public DataSource dataSource() {
-        return new org.apache.tomcat.jdbc.pool.DataSource();
-    }
+  private static Logger logger = Logger.getLogger(Application.class);
 
-    @Bean
-    public SqlSessionFactory sqlSessionFactoryBean() throws Exception {
+  @Bean
+  @ConfigurationProperties(prefix = "spring.datasource")
+  public DataSource dataSource() {
+    return new org.apache.tomcat.jdbc.pool.DataSource();
+  }
 
-        SqlSessionFactoryBean sqlSessionFactoryBean = new SqlSessionFactoryBean();
-        sqlSessionFactoryBean.setDataSource(dataSource());
+  @Bean
+  public SqlSessionFactory sqlSessionFactoryBean() throws Exception {
 
-        PathMatchingResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
+    SqlSessionFactoryBean sqlSessionFactoryBean = new SqlSessionFactoryBean();
+    sqlSessionFactoryBean.setDataSource(dataSource());
 
-        sqlSessionFactoryBean.setMapperLocations(resolver.getResources("classpath:/mybatis/*.xml"));
+    PathMatchingResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
 
-        return sqlSessionFactoryBean.getObject();
-    }
+    sqlSessionFactoryBean.setMapperLocations(resolver.getResources("classpath:/mybatis/*.xml"));
 
-    @Bean
-    public PlatformTransactionManager transactionManager() {
-        return new DataSourceTransactionManager(dataSource());
-    }
+    return sqlSessionFactoryBean.getObject();
+  }
+
+  @Bean
+  public PlatformTransactionManager transactionManager() {
+    return new DataSourceTransactionManager(dataSource());
+  }
 
 
-    /**
-     * Start
-     */
-    public static void main(String[] args) {
-        SpringApplication.run(Application.class, args);
-        logger.info("SpringBoot Start Success");
-    }
+  /**
+   * Start
+   */
+  public static void main(String[] args) {
+    SpringApplication.run(Application.class, args);
+    logger.info("SpringBoot Start Success");
+  }
 
 }

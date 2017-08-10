@@ -11,7 +11,7 @@ import io.swagger.annotations.ApiModelProperty;
  *          Copyright (c)2016 tyj-版权所有
  */
 @ApiModel(value = "用户信息")
-public class UserVo {
+public class UserInfo {
     @ApiModelProperty(value = "用户id", required = true)
     private long userId;
     @ApiModelProperty(value = "昵称", required = true)
