@@ -30,7 +30,7 @@ public class RegisterControllerImpl implements RegisterService {
     mail.setFrom(MailConsts.SENDER);
     mail.setTo(receiver);
     mail.setSubject("[翻译帮]这是您的注册码，打死都不要告诉其他人哦！");
-    mail.setText(message);
+    mail.setText("123456");
 
     try {
       MailQueue.getMailQueueInstance().produce(mail);
