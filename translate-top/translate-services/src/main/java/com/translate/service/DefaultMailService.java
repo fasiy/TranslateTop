@@ -1,8 +1,11 @@
 package com.translate.service;
 
 import com.google.gson.Gson;
+import com.sun.org.apache.regexp.internal.RE;
+import com.translate.utils.Flag;
 import com.translate.utils.GsonUtils;
 import com.translate.utils.LogUtils;
+import com.translate.utils.Operation;
 import java.text.MessageFormat;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +28,7 @@ public class DefaultMailService implements IMailService {
   @Override
   public boolean sendSimpleMail(SimpleMailMessage simpleMailMessage) {
 
-    LogUtils.info(logger, "[sendSimpleMail] [ENTRY] [request = {}.]",
+    LogUtils.info(logger, "sendSimpleMail", Operation.ENTRY, Flag.REQUEST,
         GsonUtils.toJson(simpleMailMessage));
 
     try {
@@ -35,12 +38,13 @@ public class DefaultMailService implements IMailService {
 
       boolean response = true;
 
-      LogUtils.info(logger, "[sendSimpleMail] [EXIT] [response = {}.]",
+      LogUtils.info(logger, "sendSimpleMail", Operation.EXIT, Flag.RESPONSE,
           response);
 
       return response;
     } catch (MailException e) {
-      LogUtils.info(logger, "[sendSimpleMail] [Exception] [error = {}.]", e);
+      LogUtils.info(logger, "sendSimpleMail", Operation.EXCEPTION, Flag.ERROR,
+          e);
       throw e;
     }
   }

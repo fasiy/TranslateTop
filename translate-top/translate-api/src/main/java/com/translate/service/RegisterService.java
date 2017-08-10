@@ -5,5 +5,5 @@ package com.translate.service;
  */
 public interface RegisterService {
 
-  boolean sendMail(String receiver, String subject, String message);
+  boolean sendMail(String receiver);
 }

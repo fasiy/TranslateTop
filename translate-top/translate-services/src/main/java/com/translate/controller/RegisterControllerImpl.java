@@ -24,14 +24,12 @@ public class RegisterControllerImpl implements RegisterService {
   @RequestMapping(value = "/sendMail", method = RequestMethod.POST)
   @ApiOperation(value = "发送邮件", notes = "发送邮件")
   public boolean sendMail(
-      @ApiParam(name = "receiver", value = "接收者", required = true) @RequestParam(name = "receiver", required = true) String receiver,
-      @ApiParam(name = "subject", value = "邮件主题", required = true) @RequestParam(name = "subject", required = true) String subject,
-      @ApiParam(name = "message", value = "邮件内容", required = true) @RequestParam(name = "message", required = true) String message) {
+      @ApiParam(name = "receiver", value = "接收者", required = true) @RequestParam(name = "receiver", required = true) String receiver) {
 
     SimpleMailMessage mail = new SimpleMailMessage();
     mail.setFrom(MailConsts.SENDER);
     mail.setTo(receiver);
-    mail.setSubject(subject);
+    mail.setSubject("[翻译帮]这是您的注册码，打死都不要告诉其他人哦！");
     mail.setText(message);
 
     try {
@@ -42,27 +40,5 @@ public class RegisterControllerImpl implements RegisterService {
     }
     return false;
   }
-    /*@Autowired
-    private MailService mailService;
-
-    @RequestMapping(value = "/sendMail", method = RequestMethod.POST)
-    @ApiOperation(value = "发送邮件", notes = "发送邮件")
-    public boolean sendMail(@ApiParam(name = "receiver", value = "接收者", required = true) @RequestParam(name = "receiver", required = true) String receiver,
-                            @ApiParam(name = "subject", value = "邮件主题", required = true) @RequestParam(name = "subject", required = true) String subject,
-                            @ApiParam(name = "message", value = "邮件内容", required = true) @RequestParam(name = "message", required = true) String message)
-    {
-        Mail mail = new Mail();
-
-        mail.setHostName(MailConsts.HOST_NAME);
-        mail.setUsername(MailConsts.USERNAME);
-        mail.setPassword(MailConsts.PASSWORD);
-        mail.setSender(MailConsts.SENDER);
-        mail.setReceiver(receiver);
-        mail.setSubject(subject);
-        mail.setMessage(message);
-
-        return mailService.sendEmail(mail);
-    }*/
-
 
 }
