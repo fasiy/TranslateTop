@@ -30,7 +30,7 @@ public class LogUtils {
     StringBuilder builder = new StringBuilder();
     builder.append("[").append(methodName).append("]").append(" ")
         .append("[").append(operation.name()).append("]").append(" ").append("[")
-        .append(flag.name())
+        .append(flag.name()).append("]")
         .append(" = ")
         .append("{0}.");
     String template = builder.toString();

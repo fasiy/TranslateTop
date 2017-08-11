@@ -33,9 +33,6 @@ public class DefaultMailService implements IMailService {
 
     try {
       javaMailSender.send(simpleMailMessage);
-      logger.info("simple mail send success!");
-      System.out.println("simple mail send success!");
-
       boolean response = true;
 
       LogUtils.info(logger, "sendSimpleMail", Operation.EXIT, Flag.RESPONSE,
