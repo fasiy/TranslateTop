@@ -1,8 +1,12 @@
 package com.translate.support;
 
+import com.sun.org.apache.regexp.internal.RE;
 import com.translate.service.DefaultMailService;
 import com.translate.service.IMailService;
+import com.translate.utils.Flag;
 import com.translate.utils.GsonUtils;
+import com.translate.utils.LogUtils;
+import com.translate.utils.Operation;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -37,16 +41,17 @@ public class MailConsumer {
       @Override
       public void run() {
         while (true) {
+          String currThreadName = Thread.currentThread().getName();
+
           try {
             SimpleMailMessage mail = MailQueue.getMailQueueInstance().consume();
-            System.out.println(GsonUtils.toJson(mail));
             if (null != mail) {
-              boolean flag = mailService.sendSimpleMail(mail);
-              System.out.println(flag);
-              logger.info("response = " + flag);
+              boolean status = mailService.sendSimpleMail(mail);
+              LogUtils.info(logger, currThreadName, Operation.EXIT, Flag.RESPONSE, status);
             }
           } catch (InterruptedException e) {
-            e.printStackTrace();
+            LogUtils
+                .info(logger, currThreadName, Operation.EXCEPTION, Flag.ERROR, e);
           }
         }
       }
