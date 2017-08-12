@@ -1,7 +1,10 @@
 package com.translate.controller;
 
 import com.translate.constants.MailConsts;
+import com.translate.domain.BasicUserInfo;
+import com.translate.domain.req.UserQueryRequest;
 import com.translate.service.RegisterService;
+import com.translate.service.UserQueryService;
 import com.translate.support.MailQueue;
 import com.translate.utils.ValidateUtils;
 import io.swagger.annotations.Api;
@@ -32,6 +35,9 @@ public class RegisterControllerImpl implements RegisterService {
 
   @Autowired
   private EhCacheCacheManager appEhCacheCacheManager;
+
+  @Autowired
+  private UserQueryService userQueryService;
 
   /**
    * (1) 先查找缓存里面对应key为当前receiver有没有value。如果有value，直接发送value给指定的receiver；
@@ -81,23 +87,36 @@ public class RegisterControllerImpl implements RegisterService {
   @RequestMapping(value = "/checkVerificationCode", method = RequestMethod.POST)
   @ApiOperation(value = "校验验证码", notes = "校验验证码")
   public boolean checkVerificationCode(
-      @ApiParam(name = "receiver", value = "接收者", required = true) @RequestParam(name = "receiver", required = true) String receiver,
+      @ApiParam(name = "email", value = "邮箱账号", required = true) @RequestParam(name = "email", required = true) String email,
       @ApiParam(name = "verificationCode", value = "验证码", required = true) @RequestParam(name = "verificationCode", required = true) String verificationCode) {
 
     String serverVerificationCode = StringUtils.EMPTY;
     Cache cache = appEhCacheCacheManager.getCache("verificationCode");
-    ValueWrapper valueWrapper = cache.get(receiver);
+    ValueWrapper valueWrapper = cache.get(email);
 
     if (null != valueWrapper) {
       serverVerificationCode = (String) valueWrapper.get();
       System.out.println("服务器中缓存的验证码：" + verificationCode);
 
       //服务器中缓存的验证码与客户端传输过来的验证码一致，通过验证
-      if (StringUtils.equals(verificationCode, verificationCode)) {
+      if (StringUtils.equals(serverVerificationCode, verificationCode)) {
         System.out.println("客户端通过验证！");
         return true;
       }
     }
     return false;
+  }
+
+  @Override
+  @RequestMapping(value = "/queryBindingUserInfo", method = RequestMethod.POST)
+  @ApiOperation(value = "获取绑定邮箱的账号信息", notes = "获取绑定邮箱的账号")
+  public BasicUserInfo queryBindingUserInfo(
+      @ApiParam(name = "email", value = "邮箱账号", required = true) @RequestParam(name = "email", required = true) String email) {
+
+    UserQueryRequest request = new UserQueryRequest();
+    request.setEmail(email);
+
+    BasicUserInfo basicUserInfo = userQueryService.queryUser(request);
+    return basicUserInfo;
   }
 }

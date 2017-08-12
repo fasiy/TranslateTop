@@ -1,6 +1,7 @@
 package com.translate.utils;
 
-import com.translate.support.MailConsumer;
+import com.translate.model.Flag;
+import com.translate.model.Operation;
 import java.util.Iterator;
 import java.util.Set;
 import javax.validation.ConstraintViolation;

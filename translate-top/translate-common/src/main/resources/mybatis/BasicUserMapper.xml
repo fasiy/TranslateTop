@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.translate.mapper.BasicUserMapper">
+
+  <!-- 这儿定义一个resultMap -->
+  <resultMap type="com.translate.domain.BasicUserInfo" id="basicUserInfo">
+    <id property="id" column="id"/>
+    <result property="username" column="username"/>
+    <result property="password" column="password"/>
+    <result property="mobile" column="mobile"/>
+    <result property="email" column="email"/>
+    <result property="province" column="province"/>
+    <result property="city" column="city"/>
+    <result property="workPlace" column="workplace"/>
+  </resultMap>
+
+  <select id="queryBasicUserInfo" resultMap="basicUserInfo"
+    parameterType="com.translate.domain.req.UserQueryRequest">
+
+    select id,username,mobile,email,province,city,workplace from USER_BASIC_INFO where 1=1
+    <if test="username != null and fuzzyQuery == false">
+      and username = #{username}
+    </if>
+
+    <if test="username != null and fuzzyQuery != false">
+      and username like concat(concat('%', #{username}), '%')
+    </if>
+
+    <if test="mobile != null">
+      and mobile = #{mobile}
+    </if>
+
+    <if test="province != null">
+      and province = #{province}
+    </if>
+
+    <if test="city != null">
+      and city = #{city}
+    </if>
+
+    <if test="workPlace != null and fuzzyQuery == false">
+      and workplace = #{workPlace}
+    </if>
+
+    <if test="workPlace != null and fuzzyQuery != false">
+      and workplace like concat(concat('%', #{workPlace}), '%')
+    </if>
+
+  </select>
+
+</mapper>

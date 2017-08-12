@@ -1,21 +1,12 @@
 package com.translate.support;
 
-import com.sun.org.apache.regexp.internal.RE;
-import com.translate.service.DefaultMailService;
 import com.translate.service.IMailService;
-import com.translate.utils.Flag;
-import com.translate.utils.GsonUtils;
+import com.translate.model.Flag;
 import com.translate.utils.LogUtils;
-import com.translate.utils.Operation;
-import java.util.concurrent.ExecutionException;
+import com.translate.model.Operation;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-import java.util.concurrent.Future;
-import java.util.concurrent.ThreadFactory;
-import java.util.concurrent.TimeUnit;
-import java.util.concurrent.TimeoutException;
 import javax.annotation.PostConstruct;
-import javax.sound.midi.Soundbank;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;

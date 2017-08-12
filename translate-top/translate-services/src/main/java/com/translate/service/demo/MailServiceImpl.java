@@ -1,4 +1,4 @@
-package com.translate.service;
+package com.translate.service.demo;
 
 import org.apache.commons.mail.EmailException;
 import org.apache.commons.mail.HtmlEmail;
@@ -6,7 +6,7 @@ import org.apache.log4j.Logger;
 import org.springframework.stereotype.Service;
 
 import com.translate.domain.Mail;
-import com.translate.service.MailService;
+import com.translate.service.demo.MailService;
 
 /**
  * Created by Administrator on 2017/8/6.
