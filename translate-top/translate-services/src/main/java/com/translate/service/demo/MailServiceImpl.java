@@ -5,8 +5,7 @@ import org.apache.commons.mail.HtmlEmail;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Service;
 
-import com.translate.domain.Mail;
-import com.translate.service.demo.MailService;
+import com.translate.domain.demo.Mail;
 
 /**
  * Created by Administrator on 2017/8/6.

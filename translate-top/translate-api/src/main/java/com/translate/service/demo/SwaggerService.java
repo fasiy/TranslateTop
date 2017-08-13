@@ -1,7 +1,7 @@
 package com.translate.service.demo;
 
 import com.translate.constants.Result;
-import com.translate.domain.UserInfo;
+import com.translate.domain.demo.UserInfo;
 
 /**
  * Created by ljh on 2017/6/29.

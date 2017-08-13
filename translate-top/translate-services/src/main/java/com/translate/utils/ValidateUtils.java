@@ -1,5 +1,6 @@
 package com.translate.utils;
 
+import com.translate.domain.req.UserQueryRequest;
 import com.translate.model.Flag;
 import com.translate.model.Operation;
 import java.util.Iterator;

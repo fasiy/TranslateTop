@@ -1,5 +1,6 @@
 package com.translate.domain.req;
 
+import javax.validation.constraints.Pattern;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
