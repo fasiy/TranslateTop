@@ -1,4 +1,4 @@
-package com.translate.service;
+package com.translate.service.demo;
 
 import com.translate.domain.Mail;
 import org.springframework.stereotype.Service;

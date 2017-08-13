@@ -1,5 +1,6 @@
 package com.translate.service;
 
+import com.translate.domain.BasicUserInfo;
 import javax.validation.constraints.Pattern;
 
 /**
@@ -18,7 +19,10 @@ public interface RegisterService {
   /**
    * 用户收到验证码之后，与服务器保存的验证码进行匹配
    */
-  boolean checkVerificationCode(String receiver, String verificationCode);
+  boolean checkVerificationCode(String email, String verificationCode);
 
-
+  /**
+   * 当验证码通过校验之后，获取当前[邮箱号|手机号]所绑定的账号信息
+   */
+  BasicUserInfo queryBindingUserInfo(String email);
 }

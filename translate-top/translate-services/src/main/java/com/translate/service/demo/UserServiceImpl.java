@@ -1,4 +1,4 @@
-package com.translate.service;
+package com.translate.service.demo;
 
 import com.translate.service.demo.UserService;
 import org.springframework.beans.factory.annotation.Autowired;

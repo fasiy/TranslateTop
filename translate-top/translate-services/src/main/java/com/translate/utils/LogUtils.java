@@ -1,6 +1,8 @@
 package com.translate.utils;
 
 
+import com.translate.model.Flag;
+import com.translate.model.Operation;
 import java.text.MessageFormat;
 import org.apache.log4j.Logger;
 
