@@ -5,6 +5,7 @@ import com.translate.domain.BasicUserInfo;
 import com.translate.domain.req.LoginRequest;
 import com.translate.domain.req.UserQueryRequest;
 import com.translate.domain.rsp.UserQueryResponse;
+import com.translate.exception.TranslateException;
 import com.translate.service.RegisterService;
 import com.translate.service.UserService;
 import com.translate.support.MailQueue;
@@ -12,6 +13,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import java.util.Random;
+import java.util.UUID;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.Cache;
@@ -73,6 +75,7 @@ public class RegisterController implements RegisterService {
 
     mail.setText(String.valueOf(verificationCode));
 
+
     try {
       MailQueue.getMailQueueInstance().produce(mail);
       return true;
@@ -85,7 +88,7 @@ public class RegisterController implements RegisterService {
   @Override
   @RequestMapping(value = "/checkVerificationCode", method = RequestMethod.POST)
   @ApiOperation(value = "校验验证码", notes = "校验验证码")
-  public boolean checkVerificationCode(
+  public String checkVerificationCode(
       @ApiParam(name = "email", value = "邮箱账号", required = true) @RequestParam(name = "email", required = true) String email,
       @ApiParam(name = "verificationCode", value = "验证码", required = true) @RequestParam(name = "verificationCode", required = true) String verificationCode) {
 
@@ -97,17 +100,20 @@ public class RegisterController implements RegisterService {
       serverVerificationCode = (String) valueWrapper.get();
       System.out.println("服务器中缓存的验证码：" + verificationCode);
 
+      Cache tokenCache = appEhCacheCacheManager.getCache("tokensCache");
+      String randomUUid = UUID.randomUUID().toString();
+      tokenCache.put(randomUUid,email);
       //服务器中缓存的验证码与客户端传输过来的验证码一致，通过验证
       if (StringUtils.equals(serverVerificationCode, verificationCode)) {
         System.out.println("客户端通过验证！");
-        return true;
+        return randomUUid;
       }
     }
-    return false;
+    return "";
   }
 
   @Override
-  @RequestMapping(value = "/queryBindingUserInfo", method = RequestMethod.POST)
+  @RequestMapping(value = "/queryBindingUserInfo", method = RequestMethod.GET)
   @ApiOperation(value = "获取绑定邮箱的账号信息", notes = "获取绑定邮箱的账号")
   public BasicUserInfo queryBindingUserInfo(
       @ApiParam(name = "email", value = "邮箱账号", required = true) @RequestParam(name = "email", required = true) String email) {
@@ -130,7 +136,15 @@ public class RegisterController implements RegisterService {
   @RequestMapping(value = "/registerUser", method = RequestMethod.POST)
   @ApiOperation(value = "注册新用户", notes = "注册新用户")
   public boolean register(
-      @ApiParam(name = "userInfo", value = "用户信息", required = true) @RequestBody(required = true) BasicUserInfo userInfo) {
+      @ApiParam(name = "userInfo", value = "用户信息", required = true) @RequestBody(required = true) BasicUserInfo userInfo,
+      @ApiParam(name = "emailToken", value = "邮箱校验token", required = true) @RequestParam(name = "emailToken",required = true) String emailToken) {
+    Cache tokenCache = appEhCacheCacheManager.getCache("tokensCache");
+    ValueWrapper valueWrapper = tokenCache.get(emailToken);
+    String email = (String) valueWrapper.get();
+    if(StringUtils.isBlank(email)){
+      throw new TranslateException("请重新获取验证码");
+    }
+    userInfo.setEmail(email);
     boolean registerStatus = userService.register(userInfo);
 
     return registerStatus;
