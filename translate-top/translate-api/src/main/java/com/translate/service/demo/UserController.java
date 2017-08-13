@@ -1,6 +1,6 @@
 package com.translate.service.demo;
 
-import com.translate.domain.UserInfo;
+import com.translate.domain.demo.UserInfo;
 
 /**
  * Created by zl on 2015/8/27.

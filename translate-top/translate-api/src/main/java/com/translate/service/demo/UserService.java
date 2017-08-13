@@ -1,6 +1,6 @@
 package com.translate.service.demo;
 
-import com.translate.domain.UserInfo;
+import com.translate.domain.demo.UserInfo;
 import org.springframework.stereotype.Service;
 
 

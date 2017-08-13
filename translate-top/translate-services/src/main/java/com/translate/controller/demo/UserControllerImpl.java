@@ -7,7 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.translate.domain.UserInfo;
+import com.translate.domain.demo.UserInfo;
 import com.translate.service.demo.UserService;
 
 

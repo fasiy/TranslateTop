@@ -13,7 +13,7 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import com.translate.constants.Constants;
 import com.translate.constants.Result;
-import com.translate.domain.UserInfo;
+import com.translate.domain.demo.UserInfo;
 
 /**
  * Created by ljh on 2017/6/29.

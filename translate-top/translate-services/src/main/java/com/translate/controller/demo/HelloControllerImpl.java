@@ -1,6 +1,6 @@
 package com.translate.controller.demo;
 
-import com.translate.domain.UserInfo;
+import com.translate.domain.demo.UserInfo;
 import com.translate.mapper.UserMapper;
 import com.translate.service.demo.HelloService;
 import io.swagger.annotations.Api;

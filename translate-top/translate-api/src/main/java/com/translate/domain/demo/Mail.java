@@ -1,4 +1,4 @@
-package com.translate.domain;
+package com.translate.domain.demo;
 
 import java.io.Serializable;
 

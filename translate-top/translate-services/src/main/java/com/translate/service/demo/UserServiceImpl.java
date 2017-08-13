@@ -1,10 +1,9 @@
 package com.translate.service.demo;
 
-import com.translate.service.demo.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.translate.domain.UserInfo;
+import com.translate.domain.demo.UserInfo;
 import com.translate.mapper.UserMapper;
 
 @Service
