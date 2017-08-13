@@ -1,7 +1,6 @@
 package com.translate.service.demo;
 
-import com.translate.domain.Mail;
-import org.springframework.stereotype.Service;
+import com.translate.domain.demo.Mail;
 
 /**
  * Created by Administrator on 2017/8/6.

@@ -2,24 +2,23 @@ package com.translate.controller;
 
 import com.translate.constants.MailConsts;
 import com.translate.domain.BasicUserInfo;
+import com.translate.domain.req.LoginRequest;
 import com.translate.domain.req.UserQueryRequest;
+import com.translate.domain.rsp.UserQueryResponse;
 import com.translate.service.RegisterService;
-import com.translate.service.UserQueryService;
+import com.translate.service.UserService;
 import com.translate.support.MailQueue;
-import com.translate.utils.ValidateUtils;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import java.util.Random;
-import javax.validation.Validation;
-import javax.validation.Validator;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.Cache;
 import org.springframework.cache.Cache.ValueWrapper;
 import org.springframework.cache.ehcache.EhCacheCacheManager;
 import org.springframework.mail.SimpleMailMessage;
-import org.springframework.validation.ValidationUtils;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -31,13 +30,13 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/register")
 @Api(description = "用户注册接口文档")
-public class RegisterControllerImpl implements RegisterService {
+public class RegisterController implements RegisterService {
 
   @Autowired
   private EhCacheCacheManager appEhCacheCacheManager;
 
   @Autowired
-  private UserQueryService userQueryService;
+  private UserService userService;
 
   /**
    * (1) 先查找缓存里面对应key为当前receiver有没有value。如果有value，直接发送value给指定的receiver；
@@ -116,7 +115,38 @@ public class RegisterControllerImpl implements RegisterService {
     UserQueryRequest request = new UserQueryRequest();
     request.setEmail(email);
 
-    BasicUserInfo basicUserInfo = userQueryService.queryUser(request);
+    UserQueryResponse response = userService.queryUser(request);
+
+    if (0 == response.getTotal()) {
+      return null;
+    }
+
+    //同一邮箱只会在数据库中注册一个账号中使用
+    BasicUserInfo basicUserInfo = response.getUserInfos().get(0);
     return basicUserInfo;
+  }
+
+  @Override
+  @RequestMapping(value = "/registerUser", method = RequestMethod.POST)
+  @ApiOperation(value = "注册新用户", notes = "注册新用户")
+  public boolean register(
+      @ApiParam(name = "userInfo", value = "用户信息", required = true) @RequestBody(required = true) BasicUserInfo userInfo) {
+    boolean registerStatus = userService.register(userInfo);
+
+    return registerStatus;
+  }
+
+  @Override
+  @RequestMapping(value = "/login", method = RequestMethod.POST)
+  @ApiOperation(value = "用户登录", notes = "用户登录")
+  public boolean login(
+      @ApiParam(name = "email", value = "邮箱账号", required = true) @RequestParam(name = "email", required = true) String email,
+      @ApiParam(name = "password", value = "密码", required = true) @RequestParam(name = "password", required = true) String password) {
+    LoginRequest request = new LoginRequest();
+
+    request.setEmail(email);
+    request.setPassword(password);
+
+    return userService.login(request);
   }
 }
