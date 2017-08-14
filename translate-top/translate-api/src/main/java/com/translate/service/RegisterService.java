@@ -1,7 +1,6 @@
 package com.translate.service;
 
 import com.translate.domain.BasicUserInfo;
-import javax.validation.constraints.Pattern;
 
 /**
  * Created by Administrator on 2017/8/6.
@@ -18,7 +17,7 @@ public interface RegisterService {
   /**
    * 用户收到验证码之后，与服务器保存的验证码进行匹配
    */
-  boolean checkVerificationCode(String email, String verificationCode);
+  String checkVerificationCode(String email, String verificationCode);
 
   /**
    * 当验证码通过校验之后，获取当前[邮箱号|手机号]所绑定的账号信息
@@ -28,7 +27,7 @@ public interface RegisterService {
   /**
    * 注册新用户
    */
-  boolean register(BasicUserInfo userInfo);
+  boolean register(BasicUserInfo userInfo,String emailToken);
 
   /**
    * 登录
