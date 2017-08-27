@@ -13,6 +13,9 @@ spring:
     min-idle: 8
     #连接初始值，连接池启动时创建的连接数量的初始值
     initial-size: 20
+    test-on-borrow: false
+    test-while-idle: true
+    time-between-eviction-runs-millis: 3600000
   mail:
     host: smtp.163.com
     username: aohuanhuanhw@163.com
