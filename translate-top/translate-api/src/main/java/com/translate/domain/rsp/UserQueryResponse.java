@@ -1,6 +1,6 @@
 package com.translate.domain.rsp;
 
-import com.translate.domain.BasicUserInfo;
+import com.translate.domain.model.BasicUserInfo;
 import java.util.List;
 import lombok.Getter;
 import lombok.Setter;

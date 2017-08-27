@@ -1,6 +1,6 @@
 package com.translate.mapper;
 
-import com.translate.domain.BasicUserInfo;
+import com.translate.domain.model.BasicUserInfo;
 import com.translate.domain.req.LoginRequest;
 import com.translate.domain.req.UserQueryRequest;
 import java.util.List;

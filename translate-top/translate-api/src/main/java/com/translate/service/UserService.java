@@ -1,10 +1,9 @@
 package com.translate.service;
 
-import com.translate.domain.BasicUserInfo;
+import com.translate.domain.model.BasicUserInfo;
 import com.translate.domain.req.LoginRequest;
 import com.translate.domain.req.UserQueryRequest;
 import com.translate.domain.rsp.UserQueryResponse;
-import java.util.List;
 
 /**
  * Created by Administrator on 2017/8/13.

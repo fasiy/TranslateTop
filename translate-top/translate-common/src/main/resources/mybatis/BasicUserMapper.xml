@@ -4,7 +4,7 @@
 <mapper namespace="com.translate.mapper.BasicUserMapper">
 
   <!-- 这儿定义一个resultMap -->
-  <resultMap type="com.translate.domain.BasicUserInfo" id="basicUserInfo">
+  <resultMap type="com.translate.domain.model.BasicUserInfo" id="basicUserInfo">
     <id property="id" column="id"/>
     <result property="username" column="username"/>
     <result property="password" column="password"/>

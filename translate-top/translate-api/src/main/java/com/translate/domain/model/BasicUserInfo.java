@@ -1,4 +1,4 @@
-package com.translate.domain;
+package com.translate.domain.model;
 
 import lombok.Getter;
 import lombok.Setter;
