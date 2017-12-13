@@ -1,13 +1,14 @@
 {
   "pages": [
+    "home/home",
+    "joblist/joblist",
+    "submitjob/submitjob",
     "example/index",
-
     "example/button/button",
     "example/list/list",
     "example/input/input",
     "example/slider/slider",
     "example/uploader/uploader",
-
     "example/article/article",
     "example/badge/badge",
     "example/flex/flex",
@@ -19,7 +20,6 @@
     "example/panel/panel",
     "example/preview/preview",
     "example/progress/progress",
-
     "example/actionsheet/actionsheet",
     "example/dialog/dialog",
     "example/msg/msg",
@@ -27,10 +27,8 @@
     "example/msg/msg_fail",
     "example/picker/picker",
     "example/toast/toast",
-
     "example/navbar/navbar",
     "example/tabbar/tabbar",
-
     "example/searchbar/searchbar"
   ],
   "window": {
@@ -44,6 +42,27 @@
     "connectSocket": 10000,
     "uploadFile": 10000,
     "downloadFile": 10000
+  },
+  "tabBar": {
+    "selectedColor":"#0033CC",
+    "list": [
+      {
+        "pagePath": "submitjob/submitjob",
+        "text": "发单"
+      },
+      {
+        "pagePath": "home/home",
+        "text": "个人中心"
+      },
+      {
+        "pagePath": "joblist/joblist",
+        "text": "接单"
+      },
+      {
+        "pagePath": "example/index",
+        "text": "例子"
+      }
+    ]
   },
   "debug": true
 }
