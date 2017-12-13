@@ -1,8 +1,8 @@
 {
   "pages": [
-    "home/home",
-    "joblist/joblist",
-    "submitjob/submitjob",
+    "pages/home/home",
+    "pages/joblist/joblist",
+    "pages/submitjob/submitjob",
     "example/index",
     "example/button/button",
     "example/list/list",
@@ -47,15 +47,15 @@
     "selectedColor":"#0033CC",
     "list": [
       {
-        "pagePath": "submitjob/submitjob",
+        "pagePath": "pages/submitjob/submitjob",
         "text": "发单"
       },
       {
-        "pagePath": "home/home",
+        "pagePath": "pages/home/home",
         "text": "个人中心"
       },
       {
-        "pagePath": "joblist/joblist",
+        "pagePath": "pages/joblist/joblist",
         "text": "接单"
       },
       {
