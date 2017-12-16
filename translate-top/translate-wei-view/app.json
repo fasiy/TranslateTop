@@ -44,23 +44,34 @@
     "downloadFile": 10000
   },
   "tabBar": {
-    "selectedColor":"#0033CC",
+    "color":"#1C1C1C",
+    "selectedColor":"#3cc51f",
+    "borderStyle":"white",
+    "backgroundColor":"#ffffff",
     "list": [
       {
         "pagePath": "pages/submitjob/submitjob",
-        "text": "发单"
+        "text": "我要接单",
+        "iconPath":"images/orders.png",
+        "selectedIconPath":"images/orders_selected.png"
       },
       {
         "pagePath": "pages/home/home",
-        "text": "个人中心"
+        "text": "找人翻译",
+        "iconPath": "images/publish.png",
+        "selectedIconPath": "images/publish_selected.png"
       },
       {
         "pagePath": "pages/joblist/joblist",
-        "text": "接单"
+        "text": "个人中心",
+        "iconPath": "images/personal.png",
+        "selectedIconPath": "images/personal_selected.png"
       },
       {
         "pagePath": "example/index",
-        "text": "例子"
+        "text": "小程序UI示例",
+        "iconPath": "images/orders.png",
+        "selectedIconPath": "images/orders_selected.png"
       }
     ]
   },
