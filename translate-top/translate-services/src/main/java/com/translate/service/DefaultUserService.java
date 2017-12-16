@@ -51,8 +51,12 @@ public class DefaultUserService implements UserService {
 
     LogUtils.info(logger, "register", Operation.ENTRY, Flag.REQUEST, GsonUtils.toJson(userInfo));
 
-    //检查当前邮箱号和手机号是否被注册过了，如果注册过了，那么本次注册失败
-    checkIsExist(userInfo);
+    try {
+      //检查当前邮箱号和手机号是否被注册过了，如果注册过了，那么本次注册失败
+      checkIsExist(userInfo);
+    } catch (Exception e) {
+      return false;
+    }
 
     //生成随机的用户id
     String userId = UUID.randomUUID().toString();
