@@ -1,8 +1,8 @@
 {
   "pages": [
+    "pages/submitjob/submitjob",
     "pages/home/home",
     "pages/joblist/joblist",
-    "pages/submitjob/submitjob",
     "example/index",
     "example/button/button",
     "example/list/list",
