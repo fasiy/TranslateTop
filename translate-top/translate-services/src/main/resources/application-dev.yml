@@ -1,6 +1,6 @@
 spring:
   datasource:
-    url: jdbc:mysql://119.29.22.107:3306/test?useUnicode=true&characterEncoding=gbk&zeroDateTimeBehavior=convertToNull
+    url: jdbc:mysql://119.29.22.107:3306/translate?useUnicode=true&characterEncoding=gbk&zeroDateTimeBehavior=convertToNull
     username: root
     password: Huawei123
     driver-class-name: com.mysql.jdbc.Driver
