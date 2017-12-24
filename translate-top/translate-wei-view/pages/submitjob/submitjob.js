@@ -12,7 +12,7 @@ Page({
   //事件处理函数
   bindViewTap: function() {
     wx.navigateTo({
-      url: '../logs/logs'
+      url: '../../example/progress/progress'
     })
   },
   onLoad: function () {
@@ -42,6 +42,22 @@ Page({
         }
       })
     }
+  },
+  onReady: function(){
+    // 检查当前设置
+    wx.getSetting({
+      success: (response) => {
+        console.log(response)
+        if (!response.authSetting['scope.userInfo']) {
+          wx.authorize({
+            scope: 'scope.userInfo',
+            success: () => {
+              console.log('yes')
+            }
+          })
+        }
+      }
+    })
   },
   getUserInfo: function(e) {
     console.log(e)

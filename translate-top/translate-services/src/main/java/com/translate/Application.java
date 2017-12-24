@@ -16,9 +16,7 @@ import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.transaction.PlatformTransactionManager;
 
-@EnableAutoConfiguration
 @SpringBootApplication
-@ComponentScan
 @MapperScan("com.translate.mapper")
 public class Application {
 

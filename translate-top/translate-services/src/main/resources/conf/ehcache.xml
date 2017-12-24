@@ -13,7 +13,7 @@
 
   <cache name="tokensCache" eternal="false" maxElementsInMemory="1000" overflowToDisk="false"
     diskPersistent="false"
-    timeToIdleSeconds="0" timeToLiveSeconds="3600" memoryStoreEvictionPolicy="LRU"/>
+    timeToIdleSeconds="0" timeToLiveSeconds="7200" memoryStoreEvictionPolicy="LRU"/>
 
 </ehcache>
 

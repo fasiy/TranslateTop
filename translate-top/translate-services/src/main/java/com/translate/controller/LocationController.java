@@ -24,8 +24,8 @@ public class LocationController {
   @Autowired
   private LocationService locationService;
 
-  @RequestMapping(value = "/provinces", method = RequestMethod.GET)
-  @ApiOperation(value = "获取所有省份", notes = "获取所有省份")
+    @RequestMapping(value = "/provinces", method = RequestMethod.GET)
+    @ApiOperation(value = "获取所有省份", notes = "获取所有省份")
   public List<Province> queryAllProvinces() {
 
     List<Province> provinces = locationService.queryAllProvinces();
