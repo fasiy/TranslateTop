@@ -15,4 +15,8 @@ public interface WxConstants {
 
   String UNION_ID = "unionid";
 
+  String ERROR_FOUND = "errcode";
+
+  String NETWORK_ERROR_CODE = "10000";
+
 }

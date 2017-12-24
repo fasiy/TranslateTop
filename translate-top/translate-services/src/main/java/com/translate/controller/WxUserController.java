@@ -1,5 +1,6 @@
 package com.translate.controller;
 
+import com.translate.domain.model.WxLoginSession;
 import com.translate.service.WxUserService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -23,7 +24,7 @@ public class WxUserController {
 
   @RequestMapping(value = "/getToken", method = RequestMethod.GET)
   @ApiOperation(value = "获取token", notes = "获取token")
-  public String getToken(
+  public WxLoginSession getToken(
       @ApiParam(name = "wxCode", value = "当前登录微信用户的登录凭证", required = true) @RequestParam(name = "wxCode", required = true) String wxCode) {
     return wxUserService.getToken(wxCode);
   }

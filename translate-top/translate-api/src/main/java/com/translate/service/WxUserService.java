@@ -1,5 +1,7 @@
 package com.translate.service;
 
+import com.translate.domain.model.WxLoginSession;
+
 /**
  * Created by Administrator on 2017/12/24.
  */
@@ -13,5 +15,5 @@ public interface WxUserService {
    * @param wxCode 当前登录微信用户的登录凭证
    * @return tokenId
    */
-  String getToken(String wxCode);
+  WxLoginSession getToken(String wxCode);
 }

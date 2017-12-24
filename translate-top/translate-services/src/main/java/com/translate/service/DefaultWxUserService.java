@@ -3,8 +3,13 @@ package com.translate.service;
 import com.alibaba.fastjson.JSONObject;
 import com.translate.constants.WxConstants;
 import com.translate.controller.RegisterController;
+import com.translate.domain.model.WxLoginSession;
+import com.translate.model.Flag;
+import com.translate.model.Operation;
+import com.translate.model.WxLoginError;
 import com.translate.model.WxToken;
 import com.translate.utils.GsonUtils;
+import com.translate.utils.LogUtils;
 import java.util.Random;
 import java.util.UUID;
 import org.apache.log4j.Logger;
@@ -16,6 +21,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
+import org.thymeleaf.util.StringUtils;
 
 /**
  * Created by Administrator on 2017/12/24.
@@ -35,8 +41,11 @@ public class DefaultWxUserService implements WxUserService {
   private EhCacheCacheManager appEhCacheCacheManager;
 
   @Override
-  public String getToken(String wxCode) {
+  public WxLoginSession getToken(String wxCode) {
 
+    LogUtils.info(logger, "getToken", Operation.ENTRY, Flag.REQUEST, wxCode);
+
+    WxLoginSession wxLoginSessionRsp = new WxLoginSession();
     //wxCode 换取 session_key的微信开发者接口
     /**
      * 参数	必填	说明
@@ -48,6 +57,7 @@ public class DefaultWxUserService implements WxUserService {
     String url = "https://api.weixin.qq.com/sns/jscode2session?appid=".concat(WxConstants.APP_ID)
         .concat("&secret=").concat(WxConstants.APP_SECRET).concat("&js_code=")
         .concat(wxCode).concat("&grant_type=authorization_code");
+
     ResponseEntity<String> respEntity = restTemplate.getForEntity(url, String.class);
     if (HttpStatus.OK == respEntity.getStatusCode()) {
       /**
@@ -57,26 +67,38 @@ public class DefaultWxUserService implements WxUserService {
        * unionid	用户在开放平台的唯一标识符。本字段在满足一定条件的情况下才返回
        */
       String respBody = respEntity.getBody();
-      try {
-        WxToken wxToken = GsonUtils.fromJson(respBody, WxToken.class);
+      if (StringUtils.contains(respBody, WxConstants.ERROR_FOUND)) {
+        WxLoginError wxLoginError = GsonUtils.fromJson(respBody, WxLoginError.class);
 
-        //将token信息放缓存
-        String tokenId = UUID.randomUUID().toString();
-        Cache cache = appEhCacheCacheManager.getCache("tokensCache");
-        ValueWrapper valueWrapper = cache.get(tokenId);
-        if (null == valueWrapper) {
-          cache.put(tokenId, wxToken);
-        }
-        return tokenId;
-      } catch (Exception e) {
-        logger
-            .error("get token info from api [https://api.weixin.qq.com/sns/jscode2session] failed.",
-                e);
-        //访问微信开发者Api异常时，返回null
-        return null;
+        LogUtils.info(logger, "getToken", Operation.EXCEPTION, Flag.ERROR,
+            "get token info from api [https://api.weixin.qq.com/sns/jscode2session] failed.",
+            wxLoginError);
+        //请求微信Api失败时
+        wxLoginSessionRsp.setErrorCode(wxLoginError.getErrcode());
+        wxLoginSessionRsp.setErrorMsg(wxLoginError.getErrmsg());
+        return wxLoginSessionRsp;
       }
+
+      WxToken wxToken = GsonUtils.fromJson(respBody, WxToken.class);
+
+      //将token信息放缓存
+      String tokenId = UUID.randomUUID().toString();
+      Cache cache = appEhCacheCacheManager.getCache("tokensCache");
+      ValueWrapper valueWrapper = cache.get(tokenId);
+      if (null == valueWrapper) {
+        //tokenId存入缓存中，以维持用户的登录状态，7200s失效
+        cache.put(tokenId, wxToken);
+      }
+
+      wxLoginSessionRsp.setTokenId(tokenId);
+      LogUtils.info(logger, "getToken", Operation.EXIT, Flag.RESPONSE, wxLoginSessionRsp);
+      return wxLoginSessionRsp;
     }
-    //访问微信开发者Api异常时，返回null
-    return null;
+    //访问微信开发者Api异常时(网络问题等)
+    wxLoginSessionRsp.setErrorCode(WxConstants.NETWORK_ERROR_CODE);
+    wxLoginSessionRsp.setErrorMsg("network error");
+
+    LogUtils.info(logger, "getToken", Operation.EXCEPTION, Flag.ERROR, wxLoginSessionRsp);
+    return wxLoginSessionRsp;
   }
 }
