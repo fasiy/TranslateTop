@@ -1,13 +1,13 @@
 {
   "pages": [
-    "pages/submitjob/submitjob",
-    "pages/home/home",
-    "pages/joblist/joblist",
+    "pages/orders/orders",
+    "pages/publish/publish",
+    "pages/mine/mine",
     "example/index",
     "example/button/button",
     "example/list/list",
     "example/input/input",
-    "example/slider/slider",
+    "example/slider/slider", 
     "example/uploader/uploader",
     "example/article/article",
     "example/badge/badge",
@@ -32,9 +32,9 @@
     "example/searchbar/searchbar"
   ],
   "window": {
-    "navigationBarTextStyle": "black",
-    "navigationBarTitleText": "WeUI for 小程序",
-    "navigationBarBackgroundColor": "#f8f8f8",
+    "navigationBarTextStyle": "white",
+    "navigationBarTitleText": "翻译帮",
+    "navigationBarBackgroundColor": "#20B2AA",
     "backgroundColor": "#f8f8f8"
   },
   "networkTimeout": {
@@ -50,19 +50,19 @@
     "backgroundColor":"#ffffff",
     "list": [
       {
-        "pagePath": "pages/submitjob/submitjob",
+        "pagePath": "pages/orders/orders",
         "text": "我要接单",
         "iconPath":"images/orders.png",
         "selectedIconPath":"images/orders_selected.png"
       },
       {
-        "pagePath": "pages/home/home",
+        "pagePath": "pages/publish/publish",
         "text": "找人翻译",
         "iconPath": "images/publish.png",
         "selectedIconPath": "images/publish_selected.png"
       },
       {
-        "pagePath": "pages/joblist/joblist",
+        "pagePath": "pages/mine/mine",
         "text": "个人中心",
         "iconPath": "images/personal.png",
         "selectedIconPath": "images/personal_selected.png"

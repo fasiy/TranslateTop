@@ -1,8 +1,10 @@
 App({
     onLaunch: function () {
         console.log('App Launch')
-        //获取登录状态
-        this.login();
+        //调用API从本地缓存中获取数据
+        var logs = wx.getStorageSync('logs') || []
+        logs.unshift(Date.now())
+        wx.setStorageSync('logs', logs)
     },
     onShow: function () {
         console.log('App Show')
@@ -10,29 +12,31 @@ App({
     onHide: function () {
         console.log('App Hide')
     },
-    globalData: {
-        hasLogin: false
-    },
-    login: function(){
-      //先从storage中获取登录token
-      if(wx.getStorageSync('token')){
-        return;
-      }
-      wx.login({
-        success:function(res){
-          if(res.code){
-            console.log("code是：" + res.code);
-            wx.request({
-              url: 'https://url',
-              data: {code: res.code},
-              method: 'POST',
-              success: function(){
-                
+
+    //获取用户信息
+    getUserInfo: function (cb){
+      var that = this
+      if (this.globalData.userInfo) {
+        typeof cb == "function" && cb(this.globalData.userInfo)
+      } else {
+        //调用登录接口
+        wx.login({
+          success: function () {
+            wx.getUserInfo({
+              success: function (res) {
+                that.globalData.userInfo = res.userInfo
+                typeof cb == "function" && cb(that.globalData.userInfo)
               }
             })
           }
-        }
-      })
+        })
+      }
+    },
 
+
+    globalData: {
+      userInfo: null
     }
+
+
 });
