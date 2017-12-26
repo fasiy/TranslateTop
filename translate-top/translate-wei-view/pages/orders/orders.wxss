@@ -77,7 +77,7 @@
     background:#ddd;
 }
 .nav_section_items .section_image{
-    width:170rpx;
+    width:220rpx;
     height:158rpx;
 }
 .nav_section_items .section_image image{
@@ -88,7 +88,7 @@
     width:400rpx;
     font-size:26rpx;
     color:#a9a9a9;
-    
+    padding-left:10px;
 }
 .nav_section_items .section_cont view{
     overflow:hidden;
@@ -113,7 +113,7 @@
     color:#d24a58;
 }
 .nav_section_items .section_book{
-    width:130rpx;
+    width:190rpx;
     height:80rpx;
     font-size:26rpx;
     border-radius:10%;
